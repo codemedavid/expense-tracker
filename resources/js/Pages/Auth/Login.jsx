@@ -86,7 +86,7 @@ export default function Login({ status, canResetPassword }) {
                             Forgot your password?
                         </Link>
                     )}
-                    <a route={`register`}>
+                    <a href='/register'>
                     <SecondaryButton className="ms-4" >
                     Sign Up
                     </SecondaryButton>

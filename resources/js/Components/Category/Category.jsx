@@ -2,32 +2,36 @@ import React, { useState } from 'react';
 import CategoryItems from './CategoryItems';
 
 function Category() {
-  const [itemNum, setItemNum] = useState(0);
-
-  const addItem = () => {
-    setItemNum(itemNum + 1);
-    console.log(itemNum);
-  };
 
   return (
-    <div className='max-w-full mx-auto sm:w-[95%] bg-[#eaddcf] h-22 px-2 py-2 sm:rounded-3xl'>
-        <span className='font-bold px-3'>Categories</span>
-      <div className='flex gap-2 overflow-x-auto overflow-y-hidden scroll-smooth py-3 px-2 scrollbar scrollbar-thumb-[#f25042] scrollbar-track-[#e9d4ba] scrollbar-thin scrollbar-thin '>
-        <div  onClick={addItem}>
+    <div className='w-full mx-auto bg-white h-22  py-2 sm:rounded-md'>
+        <div className='border-b-2 px-2 border-[#fafafa] mb-3'>
+            <p className='text-xl'>Goals</p>
+        </div>
+        <div className='w-full px-2 pb-4 flex gap-2 overflow-x-auto'>
+            <div className='flex'>
+
+            <div className='w-14 h-14 rounded-full flex items-center justify-center bg-orange-200'>
+                <span className='text-4xl w-14 h-14 flex justify-center items-center'>+</span>
+            </div>
+            <div className='w-20 py-2 px-2'>
+                <p className='text-xs font-bold'>Add New Goal</p>
+            </div>
+            </div>
+
+            <div className='w-14 h-14 rounded-full flex items-center justify-center bg-orange-200'>
+                <span className='text-4xl w-14 h-14 flex justify-center items-center'>+</span>
+            </div>
+            <div className='w-14 h-14 rounded-full flex items-center justify-center bg-orange-200'>
+                <span className='text-4xl w-14 h-14 flex justify-center items-center'>+</span>
+            </div>
+            <div className='w-14 h-14 rounded-full flex items-center justify-center bg-orange-200'>
+                <span className='text-4xl w-14 h-14 flex justify-center items-center'>+</span>
+            </div>
 
 
-        <div className='w-[75px] bg-white h-[75px] rounded-full flex justify-center items-center cursor-pointer'>
-          <span className='text-[#020826] text-8xl text-center mt-[-5px] ml-[-3px]'>
-            +
-          </span>
+
         </div>
-        </div>
-        <div className='flex gap-2 '>
-          {Array.from({ length: itemNum }).map((_, index) => (
-            <CategoryItems key={index} />
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
