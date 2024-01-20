@@ -68,6 +68,7 @@ function Transaction() {
             </div>
 
           </div>
+
           <table className=" w-full text-left">
             <thead className="bg-white">
               {table.getHeaderGroups().map((headerGroup) => (

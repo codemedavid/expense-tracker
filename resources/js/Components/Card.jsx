@@ -9,7 +9,10 @@ function Card() {
   return (
     <div className='w-full py-11 rounded-sm'>
     <div className={`max-w-[100%]  bg-blue-800 rounded-md lg:w-full h-40 p-4 ${card && 'blur-sm'}`}>
+        <div>
+
         <h2 className='text-white text-3xl font-bold'>Card</h2>
+        </div>
         <div className='flex justify-between gap-2 mt-4 px-2'>
         <p className='text-white text-xs'>28614-2716-72165-272</p>
         <div className='flex flex-col justify-center items-start'>
