@@ -35,6 +35,10 @@ function Transaction() {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Price",
       }),
+      columnHelper.accessor("date", {
+        cell: (info) => <span>{info.getValue()}</span>,
+        header: "Date",
+      }),
       columnHelper.accessor("progress", {
         cell: (info) => <span className="flex gap-2"><Trash size={20} color="red"/> <PencilIcon size={20} color="black" /></span>,
         header: "Action",
@@ -68,7 +72,6 @@ function Transaction() {
             </div>
 
           </div>
-
           <table className=" w-full text-left">
             <thead className="bg-white">
               {table.getHeaderGroups().map((headerGroup) => (

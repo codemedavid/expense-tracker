@@ -9,6 +9,7 @@ import Graphs from '@/Components/Category/Graphs';
 import Card from '@/Components/Card';
 import Transaction from '@/Components/Transaction/Transaction';
 import { Wallet, MoreVertical, Receipt, PiggyBank, Banknote, EyeIcon, ChevronRight } from 'lucide-react';
+import { Dropdown } from 'flowbite-react';
 export default function Dashboard({ auth }) {
     const [show, setShow] = useState(false)
     const [showModal, setShowModal] = useState(false);
@@ -41,7 +42,12 @@ export default function Dashboard({ auth }) {
                 <div className='bg-blue-800 sm:w-[24%] mt-3 relative rounded-md p-4 hover:bg-blue-900 transition ease-in-out shadow-2xl'>
                     <div className='flex justify-between'>
                         <Wallet color='white' size={60}></Wallet>
-                        <ChevronRight  color='white' size={20} className='cursor-pointer' onClick={() => changeShow()}/>
+                        <select name="" className='bg-[#eaddcf] border-0  p-0 h-5 w-20' id="">
+                            <option value="">All</option>
+                            <option value="">E-Wallet</option>
+                            <option value="">OnHand</option>
+                        </select>
+
                     </div>
 
                     <p className='text-white px-2 text-xl mt-3 font-bold'>Wallet</p>
@@ -58,7 +64,10 @@ export default function Dashboard({ auth }) {
                 <div className='bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out '>
                     <div className='flex justify-between'>
                         <Banknote color='#020826' size={60}></Banknote>
-                        <ChevronRight  color='#020826' size={20} className='cursor-pointer transition ' onClick={() => alert('click')}/>
+                        <a href="/income">
+
+                        <ChevronRight  color='#020826' size={20} className='cursor-pointer transition '/>
+                        </a>
                     </div>
 
                     <p className='text-[#020826] px-2 text-xl mt-3 font-bold'>Income</p>
@@ -92,7 +101,7 @@ export default function Dashboard({ auth }) {
 <div className=' bg-white sm:mx-10'>
     <div className='flex justify-between items-center pr-2'>
         <p className='p-5'>Transactions</p>
-         <span   onClick={() => setShowModal(true)} className='p-2 w-30 h-10 text-white bg-blue-800 cursor-pointer'>+ Add Expense</span>
+         <span   onClick={() => setShowModal(true)} className='p-2 w-30 h-10 text-white bg-blue-800 cursor-pointer rounded-sm'>+ Add Expense</span>
     </div>
 <Transaction />
 </div>
