@@ -28,6 +28,7 @@
         "@tanstack/solid-table": "^8.11.6",
         "chart.js": "^4.4.1",
         "flowbite": "^2.2.1",
+        "flowbite-react": "^0.7.2",
         "lucide-react": "^0.303.0",
         "react-chartjs-2": "^5.2.0",
         "react-table": "^7.8.0",
