@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GoalsController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,6 +31,13 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/goals', [GoalsController::class, 'index'])->name('goals.index');
+Route::get('/goals/create', [GoalsController::class, 'create'])->name('goals.create');
+Route::post('/goals', [GoalsController::class, 'store'])->name('goals.store');
+Route::get('/goals/{goal}', [GoalsController::class, 'show'])->name('goals.show');
+Route::get('/goals/{goal}/edit', [GoalsController::class, 'edit'])->name('goals.edit');
+Route::put('/goals/{goal}', [GoalsController::class, 'update'])->name('goals.update');
+Route::delete('/goals/{goal}', [GoalsController::class, 'destroy'])->name('goals.destroy');
 
 Route::get('/income', function () {
     return Inertia::render('Income');
