@@ -9,4 +9,8 @@ class Income extends Model
 {
     use HasFactory;
     protected $fillable = ['amount', 'Source'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
