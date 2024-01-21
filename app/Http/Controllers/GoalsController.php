@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Goals;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Expense;
 
 class GoalsController extends Controller
 {
@@ -16,9 +17,11 @@ class GoalsController extends Controller
      */
     public function index()
     {
+
         $user_id = Auth::id();
+        $expenses = Expense::where('user_id', $user_id)->get();
         $goals = Goals::where('user_id', $user_id)->get();
-        return Inertia::render('Dashboard', ['goals' => $goals]);
+        return Inertia::render('Dashboard', ['goals' => $goals, 'expenses' => $expenses]);
     }
 
     /**

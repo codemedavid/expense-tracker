@@ -10,6 +10,7 @@ class Expense extends Model
 {
     use HasFactory;
 
+    protected $table = "expenses";
     protected $fillable = [
         'title',
         'category',

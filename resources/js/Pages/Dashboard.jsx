@@ -19,7 +19,7 @@ import {
     ChevronRight,
 } from "lucide-react";
 import { Dropdown } from "flowbite-react";
-export default function Dashboard({ auth, expenses }) {
+export default function Dashboard({ auth, expenses, goals }) {
     console.log("kani", expenses);
     const [show, setShow] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -45,7 +45,11 @@ export default function Dashboard({ auth, expenses }) {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route("expenses.store"), { onSuccess: () => reset() });
+        console.log("Submitting data:", data);
+        post(route("expenses.store"), { onSuccess: () => {reset()
+            setShowModal(false)} });
+
+
     };
 
     return (
@@ -122,7 +126,7 @@ export default function Dashboard({ auth, expenses }) {
         <p className='p-5'>Transactions</p>
          <span   onClick={() => setShowModal(true)} className='p-2 w-30 h-10 text-white bg-blue-800 cursor-pointer rounded-sm'>+ Add Expense</span>
     </div>
-<Transaction />
+<Transaction expenses={expenses}/>
 </div>
         </div>
         <div className='flex flex-col items-center w-[90%] sm:w-[20%]'>
@@ -130,7 +134,7 @@ export default function Dashboard({ auth, expenses }) {
 
             <Card  />
 
-            <Category />
+            <Category goals={goals}/>
         </div>
 
 
@@ -198,6 +202,7 @@ export default function Dashboard({ auth, expenses }) {
                                                         className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                         id="grid-state"
                                                     >
+                                                        <option>Select</option>
                                                         <option>Food</option>
                                                         <option>Bills</option>
                                                         <option>

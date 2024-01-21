@@ -14,10 +14,8 @@ import {
 import { Trash, PencilIcon } from "lucide-react";
 
 
-
-
 function Transaction( expenses ) {
-  console.log('other data', expenses)
+  const expense = expenses.expenses
 
     const columnHelper = createColumnHelper();
 
@@ -28,21 +26,21 @@ function Transaction( expenses ) {
         header: "S.No",
       }),
 
-      columnHelper.accessor("lastName", {
+      columnHelper.accessor("title", {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Title",
       }),
 
-      columnHelper.accessor("firstName", {
+      columnHelper.accessor("category", {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Category",
       }),
 
-      columnHelper.accessor("visits", {
+      columnHelper.accessor("price", {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Price",
       }),
-      columnHelper.accessor("date", {
+      columnHelper.accessor("created_at", {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Date",
       }),
@@ -51,7 +49,7 @@ function Transaction( expenses ) {
         header: "Action",
       }),
     ];
-    const [data] = useState(() => [...USERS]);
+    const [data] = useState(() => [...expense]);
     const [globalFilter, setGlobalFilter] = useState("");
 
     const table = useReactTable({
