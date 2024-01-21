@@ -53,21 +53,19 @@ const goalTargetDate = '2023-03-03';
             </div>
 
 
-{
-    goals.map(goal => {
-        return <div className='flex'>
-
+            {goals?.map(goal => (
+    <div className='flex' key={goal.id}>
         <div className='w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-800'>
             <span className='text-4xl w-14 h-14 flex justify-center cursor-pointer items-center'></span>
         </div>
         <div className='w-36 py-2 px-2'>
             <p className='text-md font-bold'>{goal.name}</p>
-            <p className='text-xs font-bold'>₱{goal.money.toLocaleString()}</p>
-            <p className='text-xs font-bold'>{formatReadableDate( goal.target_date)}</p>
+            <p className='text-xs font-bold'>₱{goal.money?.toLocaleString()}</p>
+            <p className='text-xs font-bold'>{formatReadableDate(goal.target_date)}</p>
         </div>
-        </div>
-    })
-}
+    </div>
+))}
+
 
 
         </div>
