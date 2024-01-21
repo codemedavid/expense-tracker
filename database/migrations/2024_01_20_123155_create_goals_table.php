@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(); // Add this line to create a foreign key relationship
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // Add this line to create a foreign key relationship
             $table->string('name');
             $table->double('money');
             $table->date('target_date');
+            $table->string('users_image')->nullable();
             $table->timestamps();
         });
     }
