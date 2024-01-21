@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
-import CategoryItems from './CategoryItems';
+import { format } from 'date-fns';
 import { Inertia } from '@inertiajs/inertia';
-function Category() {
+function Category(props) {
+    function formatReadableDate(dateString) {
+    // Parse the date string and format it
+    return format(new Date(dateString), 'MMMM d, yyyy');
+}
+
+// Example usage:
+const goalTargetDate = '2023-03-03';
+    console.log(props.goals)
+
+    const goals = props.goals
     const [form, setForm] = useState({
         name: '',
         money: '',
@@ -42,6 +52,22 @@ function Category() {
             </div>
             </div>
 
+
+{
+    goals.map(goal => {
+        return <div className='flex'>
+
+        <div className='w-14 h-14 rounded-full flex items-center justify-center cursor-pointer bg-blue-800'>
+            <span className='text-4xl w-14 h-14 flex justify-center cursor-pointer items-center'></span>
+        </div>
+        <div className='w-36 py-2 px-2'>
+            <p className='text-md font-bold'>{goal.name}</p>
+            <p className='text-xs font-bold'>₱{goal.money.toLocaleString()}</p>
+            <p className='text-xs font-bold'>{formatReadableDate( goal.target_date)}</p>
+        </div>
+        </div>
+    })
+}
 
 
         </div>

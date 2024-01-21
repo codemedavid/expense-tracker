@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GoalsController;
-
+use App\Http\Controllers\IncomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,9 +27,15 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [GoalsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/income', [IncomeController::class, 'index'])->middleware(['auth', 'verified'])->name('income');
+Route::get('/income/create', [IncomeController::class, 'create'])->middleware(['auth', 'verified'])->name('income.create');
+Route::post('/income', [IncomeController::class, 'store'])->middleware(['auth', 'verified'])->name('income.store');
+Route::get('/income/{income}', [IncomeController::class, 'show'])->middleware(['auth', 'verified'])->name('income.show');
+Route::get('/income/{income}/edit', [IncomeController::class, 'edit'])->middleware(['auth', 'verified'])->name('income.edit');
+Route::put('/income/{income}', [IncomeController::class, 'update'])->middleware(['auth', 'verified'])->name('income.update');
+Route::delete('/income/{income}', [IncomeController::class, 'destroy'])->middleware(['auth', 'verified'])->name('income.destroy');
 
 Route::get('/goals', [GoalsController::class, 'index'])->name('goals.index');
 Route::get('/goals/create', [GoalsController::class, 'create'])->name('goals.create');
@@ -39,9 +45,6 @@ Route::get('/goals/{goal}/edit', [GoalsController::class, 'edit'])->name('goals.
 Route::put('/goals/{goal}', [GoalsController::class, 'update'])->name('goals.update');
 Route::delete('/goals/{goal}', [GoalsController::class, 'destroy'])->name('goals.destroy');
 
-Route::get('/income', function () {
-    return Inertia::render('Income');
-})->middleware(['auth', 'verified'])->name('income');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

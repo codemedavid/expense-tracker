@@ -28,7 +28,7 @@ function Card() {
     <div>
         <div className='bg-[#ebd5bf] w-32 h-12 mx-auto mt-3 flex items-center p-2 px-3 gap-3 rounded-full cursor-pointer' onClick={() => changeCard()}>
             {card ? <EyeOffIcon color='black' size={20}></EyeOffIcon> : <EyeIcon color='black' size={20}></EyeIcon>  }
-            <span className='font-bold text-sm'>Show Card</span>
+            <span className='font-bold text-sm'>{card ? 'Show Card' : 'Hide Card'}</span>
         </div>
     </div>
 </div>

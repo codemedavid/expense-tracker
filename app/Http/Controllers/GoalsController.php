@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Goals;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class GoalsController extends Controller
 {
@@ -15,7 +16,9 @@ class GoalsController extends Controller
      */
     public function index()
     {
-        $goals = Goals::all();
+        $user_id = Auth::id();
+        $goals = Goals::where('user_id', $user_id)->get();
+        return Inertia::render('Dashboard', ['goals' => $goals]);
     }
 
     /**

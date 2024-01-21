@@ -10,7 +10,9 @@ import Card from '@/Components/Card';
 import Transaction from '@/Components/Transaction/Transaction';
 import { Wallet, MoreVertical, Receipt, PiggyBank, Banknote, EyeIcon, ChevronRight } from 'lucide-react';
 import { Dropdown } from 'flowbite-react';
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, goals }) {
+
+    const income = localStorage.getItem('totalIncome')
     const [show, setShow] = useState(false)
     const [showModal, setShowModal] = useState(false);
     const data = [
@@ -71,17 +73,8 @@ export default function Dashboard({ auth }) {
                     </div>
 
                     <p className='text-[#020826] px-2 text-xl mt-3 font-bold'>Income</p>
-                    <h5 className='text-[#020826] font-bold text-2xl px-2'>₱300,000</h5>
+                    <h5 className='text-[#020826] font-bold text-2xl px-2'>₱{income}</h5>
 
-                </div>
-                <div className='bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out '>
-                    <div className='flex justify-between'>
-                        <PiggyBank color='#020826' size={60}></PiggyBank>
-                        <ChevronRight  color='#020826' size={20} className='cursor-pointer transition ' onClick={() => alert('click')}/>
-                    </div>
-
-                    <p className='text-[#020826] px-2 text-xl mt-3 font-bold'>Savings</p>
-                    <h5 className='text-[#020826] font-bold text-2xl px-2'>₱300,000</h5>
                 </div>
                 <div className='bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out '>
                     <div className='flex justify-between'>
@@ -93,9 +86,13 @@ export default function Dashboard({ auth }) {
                     <h5 className='text-[#020826] font-bold text-2xl px-2'>₱300,000</h5>
 
                 </div>
+                <div className='bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out '>
+                    <p className='text-[#020826] px-2 text-lg mt-3 font-bold'>Hello, {auth.user.name}</p>
+                    <h5 className='text-[#020826] text-2xl px-2'>Welcome Back!</h5>
+                </div>
 
             </div>
-<Graphs></Graphs>
+        <Graphs></Graphs>
 
 
 <div className=' bg-white sm:mx-10'>
@@ -111,7 +108,7 @@ export default function Dashboard({ auth }) {
 
             <Card  />
 
-            <Category />
+            <Category goals={goals}/>
         </div>
 
 
