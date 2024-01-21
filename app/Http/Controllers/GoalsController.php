@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Finance;
 use App\Models\User;
 use App\Models\Goals;
 use Inertia\Inertia;
@@ -19,13 +20,14 @@ class GoalsController extends Controller
      * @return \Inertia\Response
      */
     public function index()
-{
-    $user_id = Auth::id();
-    $expenses = Expense::where('user_id', $user_id)->get();
-    $goals = Goals::where('user_id', $user_id)->get();
+    {
+        $user_id = Auth::id();
+        $finance = Finance::where('user_id', $user_id)->get();
+        $expenses = Expense::where('user_id', $user_id)->get();
+        $goals = Goals::where('user_id', $user_id)->get();
 
-    return Inertia::render('Dashboard', ['goals' => $goals, 'expenses' => $expenses]);
-}
+        return Inertia::render('Dashboard', ['goals' => $goals, 'expenses' => $expenses, 'finance' => $finance]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -44,34 +46,34 @@ class GoalsController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
 
-     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required',
-        'money' => 'required|numeric',
-        'target_date' => 'required|date',
-        'users_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'money' => 'required|numeric',
+            'target_date' => 'required|date',
+            'users_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    $users_image = null;
+        $users_image = null;
 
-    if ($request->hasFile('users_image')) {
-        $image = $request->file('users_image');
-        $filename = $image->store('images', 'public');
+        if ($request->hasFile('users_image')) {
+            $image = $request->file('users_image');
+            $filename = $image->store('images', 'public');
 
-        $users_image = $filename;
+            $users_image = $filename;
+        }
+
+        $user = auth()->user();
+        $goal = $user->goals()->create([
+            'name' => $request->input('name'),
+            'money' => $request->input('money'),
+            'target_date' => $request->input('target_date'),
+            'users_image' => $users_image,
+        ]);
+
+        return Inertia::location(route('dashboard'));
     }
-
-    $user = auth()->user();
-    $goal = $user->goals()->create([
-        'name' => $request->input('name'),
-        'money' => $request->input('money'),
-        'target_date' => $request->input('target_date'),
-        'users_image' => $users_image,
-    ]);
-
-    return Inertia::location(route('dashboard'));
-}
     /**
      * Display the specified resource.
      *

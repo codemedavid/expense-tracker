@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\Finance;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 
 class ExpenseController extends Controller
 {
@@ -17,10 +19,12 @@ class ExpenseController extends Controller
     public function index(): Response
     {
         $userId = Auth::id();
-        $expenses = Expense::all();
-    
+        $expenses = Expense::where('user_id', $userId)->get();
+        $finance = Finance::where('user_id', $userId)->get();
+
         return Inertia::render('Dashboard', [
             'expenses' => $expenses,
+            'finance' => $finance,
         ]);
     }
     /**
@@ -41,10 +45,27 @@ class ExpenseController extends Controller
             'category' => 'required|string|max:255',
             'price' => 'required|integer'
         ]);
-    
-        $request->user()->expense()->create($validated);
-    
-        return redirect(route('expenses.store'));
+
+        $user = $request->user();
+        $walletBalance = $user->finance->wallet;
+
+        // Check if the user has enough balance
+        if ($walletBalance >= $validated['price']) {
+            // Deduct expense from wallet
+            $user->finance->wallet -= $validated['price'];
+
+            // Update total expenses
+            $user->finance->expense += $validated['price'];
+
+            $user->finance->save();
+
+            // Create new expense
+            $user->expense()->create($validated);
+
+            return redirect(route('expenses.store'))->with('success', 'Expense added successfully!');
+        } else {
+            return redirect(route('expenses.store'))->with('error', 'Insufficient funds!');
+        }
     }
 
     /**
