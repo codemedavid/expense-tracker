@@ -15,14 +15,15 @@ import { Trash, PencilIcon } from "lucide-react";
 
 
 function Transaction( expenses ) {
-  const expense = expenses.expenses
+
+  const expense = expenses.expenses.slice().reverse();
 
     const columnHelper = createColumnHelper();
 
     const columns = [
-      columnHelper.accessor("", {
+      columnHelper.accessor("id", {
         id: "S.No",
-        cell: (info) => <span>{info.row.index + 1}</span>,
+        cell: (info) => <span>{info.getValue()}</span>,
         header: "S.No",
       }),
 

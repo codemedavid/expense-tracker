@@ -43,6 +43,7 @@ export default function Dashboard({ auth, expenses, goals }) {
         price: "",
     });
 
+
     const submit = (e) => {
         e.preventDefault();
         console.log("Submitting data:", data);
@@ -98,23 +99,21 @@ export default function Dashboard({ auth, expenses, goals }) {
                             </div>
 
                     <p className='text-[#020826] px-2 text-xl mt-3 font-bold'>Income</p>
-                    <h5 className='text-[#020826] font-bold text-2xl px-2'>₱300,000</h5>
+                    <h5 className='text-[#020826] font-bold text-2xl px-2'>₱{localStorage.getItem('totalIncome')}</h5>
 
                 </div>
                 <div className='bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out '>
                     <div className='flex justify-between'>
-                        <PiggyBank color='#020826' size={60}></PiggyBank>
+                    <Receipt color='#020826' size={60}></Receipt>
                         <ChevronRight  color='#020826' size={20} className='cursor-pointer transition ' onClick={() => alert('click')}/>
                     </div>
 
-                    <p className='text-[#020826] px-2 text-xl mt-3 font-bold'>Savings</p>
+                    <p className='text-[#020826] px-2 text-xl mt-3 font-bold'>Expenses</p>
                     <h5 className='text-[#020826] font-bold text-2xl px-2'>₱300,000</h5>
                 </div>
                 <div className='bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out '>
-                    <div className='flex justify-between'>
-                        <Receipt color='#020826' size={60}></Receipt>
-                        <ChevronRight  color='#020826' size={20} className='cursor-pointer transition ' onClick={() => alert('click')}/>
-                    </div>
+                <p className='text-[#020826] px-2  mt-3 font-bold'>Hello, {auth.user.name}</p>
+                    <h5 className='text-[#020826] text-3xl font-bold px-2'>Welcome Back</h5>
                 </div>
 
             </div>

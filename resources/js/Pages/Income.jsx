@@ -14,7 +14,7 @@ function Income({auth, income}) {
   const totalIncome = income.reduce((acc, income) => {
     return acc + income.income;
   }, 0);
-  localStorage.setItem('totalIncome', totalIncome)
+  localStorage.setItem('totalIncome', totalIncome.toLocaleString())
 
   const handleFormChange = (e) => {
     setData(e.target.name, e.target.value);
