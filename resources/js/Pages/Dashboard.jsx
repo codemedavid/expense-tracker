@@ -1,4 +1,3 @@
-
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import Sidebar from "@/Components/Sidebar";
@@ -47,10 +46,12 @@ export default function Dashboard({ auth, expenses, goals }) {
     const submit = (e) => {
         e.preventDefault();
         console.log("Submitting data:", data);
-        post(route("expenses.store"), { onSuccess: () => {reset()
-            setShowModal(false)} });
-
-
+        post(route("expenses.store"), {
+            onSuccess: () => {
+                reset();
+                setShowModal(false);
+            },
+        });
     };
 
     return (
@@ -98,50 +99,61 @@ export default function Dashboard({ auth, expenses, goals }) {
                                 </a>
                             </div>
 
-                    <p className='text-[#020826] px-2 text-xl mt-3 font-bold'>Income</p>
-                    <h5 className='text-[#020826] font-bold text-2xl px-2'>₱{localStorage.getItem('totalIncome')}</h5>
+                            <p className="text-[#020826] px-2 text-xl mt-3 font-bold">
+                                Income
+                            </p>
+                            <h5 className="text-[#020826] font-bold text-2xl px-2">
+                                ₱300,000
+                            </h5>
+                        </div>
+                        <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
+                            <div className="flex justify-between">
+                            <Receipt color="#020826" size={60}></Receipt>
+                                <ChevronRight
+                                    color="#020826"
+                                    size={20}
+                                    className="cursor-pointer transition "
+                                    onClick={() => alert("click")}
+                                />
+                            </div>
 
-                </div>
-                <div className='bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out '>
-                    <div className='flex justify-between'>
-                    <Receipt color='#020826' size={60}></Receipt>
-                        <ChevronRight  color='#020826' size={20} className='cursor-pointer transition ' onClick={() => alert('click')}/>
+                            <p className="text-[#020826] px-2 text-xl mt-3 font-bold">
+                                Expenses
+                            </p>
+                            <h5 className="text-[#020826] font-bold text-2xl px-2">
+                                ₱300,000
+                            </h5>
+                        </div>
+                        <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
+                        <p className="text-[#020826] px-2 text-md mt-3 font-bold">
+                                Hello, {auth.user.name}
+                            </p>
+                            <h5 className="text-[#020826] font-bold text-3xl px-2">
+                                Welcome Back
+                            </h5>
+                        </div>
                     </div>
+                    <Graphs></Graphs>
 
-                    <p className='text-[#020826] px-2 text-xl mt-3 font-bold'>Expenses</p>
-                    <h5 className='text-[#020826] font-bold text-2xl px-2'>₱300,000</h5>
+                    <div className=" bg-white sm:mx-10">
+                        <div className="flex justify-between items-center pr-2">
+                            <p className="p-5">Transactions</p>
+                            <span
+                                onClick={() => setShowModal(true)}
+                                className="p-2 w-30 h-10 text-white bg-blue-800 cursor-pointer rounded-sm"
+                            >
+                                + Add Expense
+                            </span>
+                        </div>
+                        <Transaction expenses={expenses} />
+                    </div>
                 </div>
-                <div className='bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out '>
-                <p className='text-[#020826] px-2  mt-3 font-bold'>Hello, {auth.user.name}</p>
-                    <h5 className='text-[#020826] text-3xl font-bold px-2'>Welcome Back</h5>
-                </div>
+                <div className="flex flex-col items-center w-[90%] sm:w-[20%]">
+                    <Card />
 
+                    <Category goals={goals} />
+                </div>
             </div>
-<Graphs></Graphs>
-
-
-<div className=' bg-white sm:mx-10'>
-    <div className='flex justify-between items-center pr-2'>
-        <p className='p-5'>Transactions</p>
-         <span   onClick={() => setShowModal(true)} className='p-2 w-30 h-10 text-white bg-blue-800 cursor-pointer rounded-sm'>+ Add Expense</span>
-    </div>
-<Transaction expenses={expenses}/>
-</div>
-        </div>
-        <div className='flex flex-col items-center w-[90%] sm:w-[20%]'>
-
-
-            <Card  />
-
-            <Category goals={goals}/>
-        </div>
-
-
-    </div>
-
-
-
-
 
             {showModal ? (
                 <>
@@ -165,11 +177,12 @@ export default function Dashboard({ auth, expenses, goals }) {
                                 </div>
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto">
-
-                                    <form onSubmit={submit} className="w-full max-w-lg">
+                                    <form
+                                        onSubmit={submit}
+                                        className="w-full max-w-lg"
+                                    >
                                         <div className="flex flex-wrap -mx-3 mb-2">
                                             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-
                                                 <label
                                                     className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                                     for="grid-city"
@@ -182,9 +195,13 @@ export default function Dashboard({ auth, expenses, goals }) {
                                                     id="grid-city"
                                                     type="text"
                                                     placeholder="Albuquerque"
-                                                    onChange={e => setData("title", e.target.value)}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "title",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
-
                                             </div>
 
                                             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -197,7 +214,12 @@ export default function Dashboard({ auth, expenses, goals }) {
                                                 <div className="relative">
                                                     <select
                                                         value={data.category}
-                                                        onChange={e => setData("category", e.target.value)}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "category",
+                                                                e.target.value
+                                                            )
+                                                        }
                                                         className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                         id="grid-state"
                                                     >
@@ -232,12 +254,22 @@ export default function Dashboard({ auth, expenses, goals }) {
                                                     id="grid-zip"
                                                     type="text"
                                                     placeholder="90210"
-                                                    onChange={e => setData('price', e.target.value)}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "price",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         </div>
                                         <div>
-                                            <PrimaryButton disabled={processing} type="submit">button</PrimaryButton>
+                                            <PrimaryButton
+                                                disabled={processing}
+                                                type="submit"
+                                            >
+                                                button
+                                            </PrimaryButton>
                                         </div>
                                     </form>
                                 </div>
