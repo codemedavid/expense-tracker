@@ -16,7 +16,8 @@ import { Trash, PencilIcon } from "lucide-react";
 
 
 
-function Transaction() {
+function Transaction( expenses ) {
+  console.log('other data', expenses)
     const columnHelper = createColumnHelper();
 
     const columns = [
@@ -24,6 +25,11 @@ function Transaction() {
         id: "S.No",
         cell: (info) => <span>{info.row.index + 1}</span>,
         header: "S.No",
+      }),
+
+      columnHelper.accessor("lastName", {
+        cell: (info) => <span>{info.getValue()}</span>,
+        header: "Title",
       }),
 
       columnHelper.accessor("firstName", {

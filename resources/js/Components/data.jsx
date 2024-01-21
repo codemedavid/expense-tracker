@@ -2,7 +2,8 @@
 import { faker } from '@faker-js/faker';
 
 
-export function createRandomUser() {
+export function createRandomUser( expenses ) {
+  console.log("kuha", expenses);
   return {
     profile: faker.image.avatar(),
     firstName: faker.name.firstName(),
