@@ -6,6 +6,7 @@ use App\Models\Income;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Finance;
 
 class IncomeController extends Controller
 {
@@ -52,11 +53,21 @@ class IncomeController extends Controller
 
         // Create a new income record associated with the currently authenticated user
         $user = auth()->user();
-        $user->income()->create($request->all());
+        $income = $user->income()->create($request->all());
+
+        // Update or create finance record
+        $finance = $user->finance ?? new Finance();
+        $finance->income_id = $income->id; // Assign income_id
+        $finance->user_id = $user->id; // Assign user_id
+        $finance->totalIncome += $income->income;
+        $finance->wallet += $income->income;
+        $finance->save();
+
 
         // Redirect to the index page with a success message
-        return redirect()->route('income');
+        return redirect()->route('income')->with('success', 'Income added successfully!');
     }
+
 
     // Other methods like show, edit, update, destroy, etc.
 }
