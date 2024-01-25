@@ -14,6 +14,8 @@ class IncomeController extends Controller
      *
      * @return \Inertia\Response
      */
+
+
     public function index()
     {
         // Retrieve all income records from the database
@@ -21,7 +23,11 @@ class IncomeController extends Controller
         $income = Income::where('user_id', $user_id)->get();
 
         // Use Inertia to render the React component with data
-        return Inertia::render('Income', ['income' => $income]);
+        return Inertia::render('Income',  [
+            'auth' => Auth::user(),
+            'income' => $income,
+    ]);
+
     }
 
     /**

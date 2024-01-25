@@ -18,8 +18,11 @@ import {
     ChevronRight,
 } from "lucide-react";
 import { Dropdown } from "flowbite-react";
-export default function Dashboard({ auth, expenses, goals }) {
-    console.log("kani", expenses);
+export default function Dashboard({ auth, expenses, goals, income}) {
+
+
+    console.log('income ni diri', income);
+
     const [show, setShow] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const data1 = [
@@ -41,7 +44,6 @@ export default function Dashboard({ auth, expenses, goals }) {
         category: "",
         price: "",
     });
-
 
     const submit = (e) => {
         e.preventDefault();
@@ -99,6 +101,8 @@ export default function Dashboard({ auth, expenses, goals }) {
                                 </a>
                             </div>
 
+                           
+
                             <p className="text-[#020826] px-2 text-xl mt-3 font-bold">
                                 Income
                             </p>
@@ -108,7 +112,7 @@ export default function Dashboard({ auth, expenses, goals }) {
                         </div>
                         <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
                             <div className="flex justify-between">
-                            <Receipt color="#020826" size={60}></Receipt>
+                                <Receipt color="#020826" size={60}></Receipt>
                                 <ChevronRight
                                     color="#020826"
                                     size={20}
@@ -125,7 +129,7 @@ export default function Dashboard({ auth, expenses, goals }) {
                             </h5>
                         </div>
                         <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
-                        <p className="text-[#020826] px-2 text-md mt-3 font-bold">
+                            <p className="text-[#020826] px-2 text-md mt-3 font-bold">
                                 Hello, {auth.user.name}
                             </p>
                             <h5 className="text-[#020826] font-bold text-3xl px-2">

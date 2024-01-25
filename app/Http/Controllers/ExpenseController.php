@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\Income;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -14,13 +15,16 @@ class ExpenseController extends Controller
     /**
      * Display a listing of the resource.
      */
+   
     public function index(): Response
     {
-        $userId = Auth::id();
+        $user_id = Auth::id();
         $expenses = Expense::all();
+        $income = Income::where('user_id', $user_id)->get();
     
         return Inertia::render('Dashboard', [
             'expenses' => $expenses,
+            'income' => $income,
         ]);
     }
     /**
