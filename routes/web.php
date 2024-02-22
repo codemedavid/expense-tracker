@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GoalsController;
 use App\Http\Controllers\IncomeController;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\FinancialSetupController;
+
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -28,7 +30,12 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get('/dashboard', [GoalsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [GoalsController::class, 'index'])->middleware(['auth', 'verified', 'financial.setup.complete'])->name('dashboard');
+
+Route::group(['middleware' => ['auth', 'setup.complete']], function () {
+    Route::get('financial/setup', [FinancialSetupController::class, 'index'])->name('financial.setup');
+    Route::post('/financial/setup', [FinancialSetupController::class, 'store']);
+});
 
 Route::get('/income', [IncomeController::class, 'index'])->middleware(['auth', 'verified'])->name('income');
 Route::get('/income/create', [IncomeController::class, 'create'])->middleware(['auth', 'verified'])->name('income.create');
