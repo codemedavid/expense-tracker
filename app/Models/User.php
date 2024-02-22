@@ -22,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'monthly_salary',
+        'desired_budget',
+        'budget_type',
+        'setup_complete',
     ];
 
     /**
@@ -59,5 +63,9 @@ class User extends Authenticatable
     public function finance()
     {
         return $this->hasOne(Finance::class);
+    }
+    public function recurringBills()
+    {
+        return $this->hasMany(RecurringBill::class);
     }
 }
