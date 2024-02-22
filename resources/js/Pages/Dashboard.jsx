@@ -65,15 +65,7 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                         <div className="bg-blue-800 sm:w-[24%] mt-3 relative rounded-md p-4 hover:bg-blue-900 transition ease-in-out shadow-2xl">
                             <div className="flex justify-between">
                                 <Wallet color="white" size={60}></Wallet>
-                                <select
-                                    name=""
-                                    className="bg-[#eaddcf] border-0  p-0 h-5 w-20"
-                                    id=""
-                                >
-                                    <option value="">All</option>
-                                    <option value="">E-Wallet</option>
-                                    <option value="">OnHand</option>
-                                </select>
+
                             </div>
 
                             <p className="text-white px-2 text-xl mt-3 font-bold">
@@ -160,6 +152,10 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
             {showModal ? (
                 <>
                     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <form
+                onSubmit={submit}
+                className="w-full max-w-lg"
+            >
                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
                             {/*content*/}
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -179,10 +175,6 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                 </div>
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto">
-                                    <form
-                                        onSubmit={submit}
-                                        className="w-full max-w-lg"
-                                    >
                                         <div className="flex flex-wrap -mx-3 mb-2">
                                             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                                 <label
@@ -266,14 +258,8 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                             </div>
                                         </div>
                                         <div>
-                                            <PrimaryButton
-                                                disabled={processing}
-                                                type="submit"
-                                            >
-                                                button
-                                            </PrimaryButton>
+
                                         </div>
-                                    </form>
                                 </div>
                                 {/*footer*/}
                                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
@@ -281,19 +267,20 @@ export default function Dashboard({ auth, expenses, goals, finance }) {
                                         className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
                                         onClick={() => setShowModal(false)}
-                                    >
+                                        >
                                         Close
                                     </button>
                                     <button
                                         className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                        type="button"
-                                        onClick={() => setShowModal(false)}
-                                    >
+                                        type="submit"
+
+                                        >
                                         Save Changes
                                     </button>
                                 </div>
                             </div>
                         </div>
+                                        </form>
                     </div>
                     <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
                 </>

@@ -68,6 +68,7 @@ function Transaction( expenses ) {
         <div className="p-1 max-w-5xl mx-auto text-black fill-gray-400">
           <div className="flex justify-between mb-2 mx-5">
             <div className="w-full flex items-center gap-1">
+              <DownloadBtn expense={expense} />
               <SearchIcon/>
               <DebouncedInput
                 value={globalFilter ?? ""}

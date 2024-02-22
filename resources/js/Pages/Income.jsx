@@ -32,8 +32,8 @@ function Income({auth, income}) {
     user={auth.user}
 >
 <div className='flex flex-col sm:flex-row gap-10'>
-<div className='w-[65%] p-4'>
-    <div className="bg-white h-24 w-full rounded-md flex">
+<div className='w-full sm:w-[65%] p-4'>
+    <div className="bg-white h-auto w-full rounded-md flex">
         <div className='w-[5%] p-2'>
             <QuoteIcon size={30} fill='black'/>
         </div>
@@ -79,7 +79,7 @@ function Income({auth, income}) {
 
 </div>
 
-    <div className='mt-4 mx-3 w-[32%] rounded-md bg-white h-[100vh]'>
+    <div className='mt-4 mx-3 sm:w-[32%] rounded-md bg-white h-[100vh]'>
     <div className='mx-3 mt-10 mb-5 flex justify-end'>
     <span className='bg-blue-800 p-2 rounded-md text-white cursor-pointer'  onClick={() => setShowModal(true)}>+ Income</span>
 
