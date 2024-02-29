@@ -59,10 +59,18 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::post('/reset-password', 'PasswordResetController@reset')->name('password.reset');
 
 
 Route::resource('expenses', ExpenseController::class)
     ->middleware(['auth', 'verified']);
+
+
+// expense page route
+    Route::get('/expense', function(){
+        return Inertia::render('Expense');
+        
+        });
 
 
 require __DIR__ . '/auth.php';

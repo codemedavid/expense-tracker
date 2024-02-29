@@ -5,7 +5,7 @@ function FinancialSetupPage() {
   const [step, setStep] = useState(1);
   const [monthlySalary, setMonthlySalary] = useState('');
   const [recurringBills, setRecurringBills] = useState([{ name: '', amount: '', start: '', end: '' }]);
-  const [desiredBudget, setDesiredBudget] = useState('');
+ const [desiredBudget, setDesiredBudget] = useState('');
   const [budgetType, setBudgetType] = useState('');
   const totalSteps = 5;
 
@@ -43,16 +43,16 @@ function FinancialSetupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-    <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <div className="flex justify-between items-center mb-8">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="w-full max-w-md p-8 bg-white rounded shadow-md">
+        <div className="flex items-center justify-between mb-8">
             <div className="text-gray-600">Question {step}/5</div>
             <div className="w-10 h-1 bg-blue-500 rounded" style={{ width: `${(step / 7) * 100}%` }}></div>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
             {step === 1 && (
                 <div>
-                    <label htmlFor="monthlySalary" className="text-lg font-semibold text-gray-700 block mb-2">
+                    <label htmlFor="monthlySalary" className="block mb-2 text-lg font-semibold text-gray-700">
                        Enter your Monthly Salary
                     </label>
                     <input
@@ -60,7 +60,7 @@ function FinancialSetupPage() {
                         type="number"
                         value={monthlySalary}
                         onChange={(e) => setMonthlySalary(e.target.value)}
-                        className="mt-1 block w-full border-gray-300 shadow-sm rounded-md"
+                        className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
                         placeholder="30,000"
                     />
                 </div>
@@ -70,45 +70,45 @@ function FinancialSetupPage() {
                 recurringBills.map((bill, index) => (
                     <div key={index} className="mb-4">
                       <label className="block text-sm font-medium text-gray-700">Recurring Bill {index + 1}</label>
-                      <div className="flex flex-wrap -mx-3 mb-2">
-                        <div className="w-full md:w-1/2 px-3 mb-2 md:mb-0">
+                      <div className="flex flex-wrap mb-2 -mx-3">
+                        <div className="w-full px-3 mb-2 md:w-1/2 md:mb-0">
                           <input
                             type="text"
                             name="name"
                             value={bill.name}
                             onChange={(e) => handleBillChange(index, e)}
                             placeholder="Name of the bill"
-                            className="block w-full border-gray-300 shadow-sm rounded-md"
+                            className="block w-full border-gray-300 rounded-md shadow-sm"
                           />
                         </div>
-                        <div className="w-full md:w-1/2 px-3">
+                        <div className="w-full px-3 md:w-1/2">
                           <input
                             type="number"
                             name="amount"
                             value={bill.amount}
                             onChange={(e) => handleBillChange(index, e)}
                             placeholder="Amount"
-                            className="block w-full border-gray-300 shadow-sm rounded-md"
+                            className="block w-full border-gray-300 rounded-md shadow-sm"
                           />
                         </div>
                       </div>
-                      <div className="flex flex-wrap -mx-3 mb-6">
-                        <div className="w-full md:w-1/2 px-3 mb-2 md:mb-0">
+                      <div className="flex flex-wrap mb-6 -mx-3">
+                        <div className="w-full px-3 mb-2 md:w-1/2 md:mb-0">
                           <input
                             type="date"
                             name="start"
                             value={bill.start}
                             onChange={(e) => handleBillChange(index, e)}
-                            className="block w-full border-gray-300 shadow-sm rounded-md"
+                            className="block w-full border-gray-300 rounded-md shadow-sm"
                           />
                         </div>
-                        <div className="w-full md:w-1/2 px-3">
+                        <div className="w-full px-3 md:w-1/2">
                           <input
                             type="date"
                             name="end"
                             value={bill.end}
                             onChange={(e) => handleBillChange(index, e)}
-                            className="block w-full border-gray-300 shadow-sm rounded-md"
+                            className="block w-full border-gray-300 rounded-md shadow-sm"
                           />
                         </div>
                       </div>
@@ -139,7 +139,7 @@ function FinancialSetupPage() {
                   type="number"
                   value={desiredBudget}
                   onChange={(e) => setDesiredBudget(e.target.value)}
-                  className="mt-1 block w-full border border-gray-300 p-2 rounded-md"
+                  className="block w-full p-2 mt-1 border border-gray-300 rounded-md"
                   id="desiredBudget"
                   placeholder="30,000"
                 />
@@ -151,7 +151,7 @@ function FinancialSetupPage() {
                  <select
                    value={budgetType}
                    onChange={(e) => setBudgetType(e.target.value)}
-                   className="mt-1 block w-full border border-gray-300 p-2 rounded-md"
+                   className="block w-full p-2 mt-1 border border-gray-300 rounded-md"
                    id="budgetType"
                  >
                    <option value="">Select...</option>
@@ -163,7 +163,7 @@ function FinancialSetupPage() {
             )}
             {
                 step === 5 && (
-                    <p className='bg-green-300 p-3 rounded-sm'>Thank you for submmiting your information! 🥳</p>
+                    <p className='p-3 bg-green-300 rounded-sm'>Thank you for submmiting your information! 🥳</p>
                 )
             }
 
@@ -171,7 +171,7 @@ function FinancialSetupPage() {
             <div className="flex justify-end mt-6">
                 <button
                     type="submit"
-                    className="px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="px-6 py-2 text-base font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                     Continue →
                 </button>
