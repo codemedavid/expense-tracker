@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes rotate-slide-jump {
+    0% {
+      transform: rotate(0deg) translateX(0) translateY(0);
+    }
+    25% {
+      transform: rotate(-45deg) translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: rotate(-45deg) translateX(-50%) translateY(-20px);
+    }
+    75% {
+      transform: rotate(-45deg) translateX(-50%) translateY(0);
+    }
+    100% {
+      transform: rotate(0deg) translateX(0) translateY(0);
+    }
+  }
+  
+  .card-animation {
+    animation: rotate-slide-jump 5s forwards; /* Adjust time as needed */
+  }
+  
+  
