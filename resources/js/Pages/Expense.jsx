@@ -1,11 +1,11 @@
 import React from 'react'
 import CardStack from './CardStack'; // Import the CardStack component
-
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Bar, Pie } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 
 
-function Expense() {
+function Expense({auth}) {
   const chartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June'],
     datasets: [{
@@ -28,7 +28,7 @@ function Expense() {
   };
   
   return (
-
+    <AuthenticatedLayout user={auth.user}>
 
 
 <div>
@@ -118,7 +118,7 @@ function Expense() {
 
 
 
-
+</AuthenticatedLayout>
 
   )
 }

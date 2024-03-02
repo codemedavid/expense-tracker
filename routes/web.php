@@ -70,7 +70,7 @@ Route::resource('expenses', ExpenseController::class)
     Route::get('/expense', function(){
         return Inertia::render('Expense');
         
-        });
+        })->middleware(['auth', 'verified']);
 
 
 require __DIR__ . '/auth.php';
