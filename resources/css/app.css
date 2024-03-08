@@ -2,26 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes rotate-slide-jump {
-    0% {
-      transform: rotate(0deg) translateX(0) translateY(0);
-    }
-    25% {
-      transform: rotate(-45deg) translateX(-50%) translateY(0);
-    }
-    50% {
-      transform: rotate(-45deg) translateX(-50%) translateY(-20px);
-    }
-    75% {
-      transform: rotate(-45deg) translateX(-50%) translateY(0);
-    }
-    100% {
-      transform: rotate(0deg) translateX(0) translateY(0);
-    }
-  }
-  
-  .card-animation {
-    animation: rotate-slide-jump 5s forwards; /* Adjust time as needed */
-  }
-  
+/* styles.css */
+button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background: #fff;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
   

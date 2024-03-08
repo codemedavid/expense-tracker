@@ -3,6 +3,7 @@ import CardStack from './CardStack'; // Import the CardStack component
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Bar, Pie } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
+import RecurringExpenses from './RecurringExpenses'; // Make sure the path is correct
 
 
 function Expense({auth}) {
@@ -38,8 +39,8 @@ function Expense({auth}) {
   <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
     
     {/* Column for Section 7 */}
-    <div className="flex items-center justify-center p-4 text-black bg-white-500 rounded shadow lg:col-span-3">
-      <h2>SECTION 7</h2>
+    <div className="flex items-top justify-top p-4 text-black bg-white-500 rounded shadow lg:col-span-3">
+    <RecurringExpenses />
     </div>
 
     {/* Column for Sections 1-4 */}
