@@ -14,28 +14,34 @@ import {
 import { Trash, PencilIcon } from "lucide-react";
 
 
+function Transaction( expenses ) {
 
+  const expense = expenses.expenses.slice().reverse();
 
-function Transaction() {
     const columnHelper = createColumnHelper();
 
     const columns = [
-      columnHelper.accessor("", {
+      columnHelper.accessor("id", {
         id: "S.No",
-        cell: (info) => <span>{info.row.index + 1}</span>,
+        cell: (info) => <span>{info.getValue()}</span>,
         header: "S.No",
       }),
 
-      columnHelper.accessor("firstName", {
+      columnHelper.accessor("title", {
+        cell: (info) => <span>{info.getValue()}</span>,
+        header: "Title",
+      }),
+
+      columnHelper.accessor("category", {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Category",
       }),
 
-      columnHelper.accessor("visits", {
+      columnHelper.accessor("price", {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Price",
       }),
-      columnHelper.accessor("date", {
+      columnHelper.accessor("created_at", {
         cell: (info) => <span>{info.getValue()}</span>,
         header: "Date",
       }),
@@ -44,7 +50,7 @@ function Transaction() {
         header: "Action",
       }),
     ];
-    const [data] = useState(() => [...USERS]);
+    const [data] = useState(() => [...expense]);
     const [globalFilter, setGlobalFilter] = useState("");
 
     const table = useReactTable({
@@ -62,6 +68,7 @@ function Transaction() {
         <div className="p-1 max-w-5xl mx-auto text-black fill-gray-400">
           <div className="flex justify-between mb-2 mx-5">
             <div className="w-full flex items-center gap-1">
+              <DownloadBtn expense={expense} />
               <SearchIcon/>
               <DebouncedInput
                 value={globalFilter ?? ""}

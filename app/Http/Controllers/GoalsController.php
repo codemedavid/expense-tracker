@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Finance;
+use App\Models\User;
 use App\Models\Goals;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Expense;
+use Illuminate\Http\RedirectResponse;
+use Intervention\Image\Facades\Image;
 
 class GoalsController extends Controller
 {
@@ -15,7 +21,12 @@ class GoalsController extends Controller
      */
     public function index()
     {
-        $goals = Goals::all();
+        $user_id = Auth::id();
+        $finance = Finance::where('user_id', $user_id)->get();
+        $expenses = Expense::where('user_id', $user_id)->get();
+        $goals = Goals::where('user_id', $user_id)->get();
+
+        return Inertia::render('Dashboard', ['goals' => $goals, 'expenses' => $expenses, 'finance' => $finance]);
     }
 
     /**
@@ -34,23 +45,35 @@ class GoalsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
+
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
             'money' => 'required|numeric',
             'target_date' => 'required|date',
+            'users_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Associate the goal with the currently authenticated user
-        $user = auth()->user();
-        $user->goals()->create($request->all());
+        $users_image = null;
 
-        // Use Inertia::location to set the redirect location and flash data
+        if ($request->hasFile('users_image')) {
+            $image = $request->file('users_image');
+            $filename = $image->store('images', 'public');
+
+            $users_image = $filename;
+        }
+
+        $user = auth()->user();
+        $goal = $user->goals()->create([
+            'name' => $request->input('name'),
+            'money' => $request->input('money'),
+            'target_date' => $request->input('target_date'),
+            'users_image' => $users_image,
+        ]);
+
         return Inertia::location(route('dashboard'));
     }
-
-
     /**
      * Display the specified resource.
      *

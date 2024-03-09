@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('goals', function (Blueprint $table) {
+        Schema::create('recurring_bills', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // Add this line to create a foreign key relationship
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->double('money');
-            $table->date('target_date');
-            $table->string('users_image')->nullable();
+            $table->decimal('amount', 8, 2);
+            $table->date('start');
+            $table->date('end')->nullable(); // Make nullable if the bill does not have a specific end date
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('goals');
+        Schema::dropIfExists('recurring_bills');
     }
 };

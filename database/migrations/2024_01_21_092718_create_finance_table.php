@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('goals', function (Blueprint $table) {
+        Schema::create('finance', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // Add this line to create a foreign key relationship
-            $table->string('name');
-            $table->double('money');
-            $table->date('target_date');
-            $table->string('users_image')->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('income_id')->nullable()->constrained('income');
+            $table->decimal('totalIncome', 10, 2)->default(0);
+            $table->decimal('wallet', 10, 2)->default(0);
+            $table->decimal('expense', 10, 2)->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('goals');
+        Schema::dropIfExists('finance');
     }
 };

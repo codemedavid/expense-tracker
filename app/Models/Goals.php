@@ -9,5 +9,5 @@ class Goals extends Model
 {
     use HasFactory;
     protected $table = 'goals';
-    protected $fillable = ['name', 'money', 'target_date'];
+    protected $fillable = ['name', 'money', 'target_date', 'users_image'];
 }
