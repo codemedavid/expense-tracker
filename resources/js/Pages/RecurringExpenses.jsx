@@ -11,7 +11,7 @@ function RecurringExpenses() {
     { id: 'car', name: 'Car', amount: 300 },
     { id: 'family', name: 'family', amount: 1000 },
     { id: 'occasions', name: 'occasions', amount: 500 },
-    { id: 'bitches', name: 'bitches', amount: 10000 },
+    { id: 'bitches', name: '', amount: 10000 },
     { id: 'charity', name: 'charity', amount: 300 },
     // Add more expenses as needed
   ]);
