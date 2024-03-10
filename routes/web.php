@@ -48,6 +48,7 @@ Route::delete('/income/{income}', [IncomeController::class, 'destroy'])->middlew
 Route::get('/goals', [GoalsController::class, 'index'])->name('goals.index');
 Route::get('/goals/create', [GoalsController::class, 'create'])->name('goals.create');
 Route::post('/goals', [GoalsController::class, 'store'])->name('goals.store');
+Route::post('/goals/funds', [GoalsController::class, 'addFunds'])->name('goals.addFunds');
 Route::get('/goals/{goal}', [GoalsController::class, 'show'])->name('goals.show');
 Route::get('/goals/{goal}/edit', [GoalsController::class, 'edit'])->name('goals.edit');
 Route::put('/goals/{goal}', [GoalsController::class, 'update'])->name('goals.update');

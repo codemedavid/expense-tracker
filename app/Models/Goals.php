@@ -9,5 +9,11 @@ class Goals extends Model
 {
     use HasFactory;
     protected $table = 'goals';
-    protected $fillable = ['name', 'money', 'target_date', 'users_image'];
+    protected $fillable = ['user_id', 'name', 'target_amount', 'balance', 'target_date', 'users_image'];
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
 }

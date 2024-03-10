@@ -29,25 +29,34 @@ function Graphs(props) {
   const result = calculateCategoryTotalPrices(props.expenses);
 
   const categories = result.map((item) => item.category);
-  const totals = result.map((item) => item.total);
+  const totals = result.map((item) => item.total)
+
+  const chartData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [{
+      label: 'Monthly Expenses',
+      data: [500, 600, 800, 810, 560, 550],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        // More colors as needed
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        // More borders as needed
+      ],
+      borderWidth: 1,
+    }],
+  };
+
 
   return (
     <div className='flex flex-col sm:flex-row sm:px-11 sm:gap-5 sm:py-4 '>
       <div className='w-full h-70 p-4 sm:w-7/12 bg-white rounded-md'>
-        <Line
-          data={{
-            labels: categories,
-            datasets: [
-              {
-                label: 'Total Expenses',
-                data: totals,
-                backgroundColor: 'rgba(75,192,192,0.2)',
-                borderColor: 'rgba(75,192,192,1)',
-                borderWidth: 1,
-              },
-            ],
-          }}
-        />
+      <Bar data={chartData} options={{ responsive: true }} />
       </div>
       <div className='w-full sm:w-5/12 bg-white rounded-md'>
         <div className='flex'>

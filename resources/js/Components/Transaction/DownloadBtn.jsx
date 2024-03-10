@@ -1,17 +1,28 @@
 import { DownloadIcon } from "../Icons/Icons";
 import * as XLSX from "xlsx/xlsx.mjs";
+import { format, parseISO } from 'date-fns';
 
-const DownloadBtn = ({ expense = [], fileName }) => {
+const DownloadBtn = ({ expense = [], fileName = "data" }) => {
+  const handleDownload = () => {
+    const filteredData = expense.map(({ title, category, price, created_at }) => ({
+      title,
+      category,
+      price,
+      // Format the date to a more readable form using date-fns
+      created_at: format(parseISO(created_at), 'MMMM dd, yyyy')
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(filteredData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    XLSX.writeFile(workbook, `${fileName}.xlsx`);
+  };
+
   return (
     <button
       className="download-btn"
-      onClick={() => {
-        const datas = expense?.length ? expense : [];
-        const worksheet = XLSX.utils.json_to_sheet(datas);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-        XLSX.writeFile(workbook, fileName ? `${fileName}.xlsx` : "data.xlsx");
-      }}
+      onClick={handleDownload}
+      aria-label="Download Excel"
     >
       <DownloadIcon />
       Download
