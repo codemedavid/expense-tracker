@@ -5,9 +5,9 @@ import { Bar, Pie } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import RecurringExpenses from './RecurringExpenses'; // Make sure the path is correct
 import { Reorder } from 'framer-motion';
-import DropdownMenu from './DropdownMenu';
 
-import { Download, Filter } from 'lucide-react';// the drop down icons where the download icon is direct imported so it cant have function
+
+// the drop down icons where the download icon is direct imported so it cant have function
 import { Search } from 'lucide-react';
 
 import ExpenseHistory from './ExpenseHistory';
@@ -17,14 +17,8 @@ function Expense({auth}) {
 
 
 
-    const items = [
-        { name: "Item 1" },
-        { name: "Item 2" },
-        { name: "Item 3"},
-        { name: "Item 4" },
-        { name: "Item 5" },
-        { name: "Item 6"},
-      ];
+
+
 
       const [setCategoryFilter, categoryFilter] = useState("")
 
@@ -114,55 +108,16 @@ function Expense({auth}) {
 
       {/* Section 6 */}
       <div className="flex-grow p-4 text-black bg-white-500 rounded shadow">
-        <div className="flex mb-4 w-full text-center p-5 bg-blue-800 text-white rounded">
-          <div className='w-[22%] pt-2'>
-          <Download className="mr-2" size={24} /> {/* Download icon used directly */}
-          </div>
-
-           {/* Container for the search bar and icon */}
-           <div className="flex-grow">
-           <div className="relative w-full max-w-5xl"> {/* Adjusted max-width to max-w-5xl */}
-          <button
-          onClick={() => {/* Define your search logic here */}}
-          className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black"
-        >
-          <Search size={20} />
-        </button>
-            <input
-              type="text"
-              placeholder="Search History..."
-              className="pl-8 pr-3 py-2 w-full rounded bg-white text-black placeholder-gray-500 focus:outline-none focus:shadow-outline"
-            />
-          </div>
-        </div>
-          <div className='w-[20%] pt-2 pl-3'>
-          <DropdownMenu iconType="filter">
-
-          <div className="w-48 mx-auto my-4">
-          {items.map((item, index) => (
-            // Keeping the item style consistent with your previous setup
-            <div key={index} className="w-full p-3 mb-4 bg-gray-100 text-black rounded shadow hover:bg-gray-200 text-center">
-              {item.name}
-            </div>
-          ))}
+      <ExpenseHistory />
         </div>
 
-              </DropdownMenu>
-
-          </div>
         </div>
-{/* ExpenseHistory Component */}
-<ExpenseHistory />
-
-      </div>
-
-
-      </div>
 
 
 
   </div>
 </div>
+
 
 
 </div>
