@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // Add this line to create a foreign key relationship
             $table->string('name');
-            $table->double('money');
+            $table->double('target_amount');
+            $table->double('balance');
             $table->date('target_date');
             $table->string('users_image')->nullable();
             $table->timestamps();

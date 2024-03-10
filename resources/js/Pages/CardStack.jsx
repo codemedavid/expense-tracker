@@ -56,7 +56,7 @@ function CardStack() {
   };
 
   const getStyle = (index, isHovered) => ({
-    transform: `translateY(${index * -21}px) translateX(${index * 34}px) ${isHovered && index > 0 ? 'translateY(-10px)' : ''}`,
+    transform: `translateY(${index * -21}px) translateX(${index * 44}px) ${isHovered && index > 0 ? 'translateY(-10px)' : ''}`,
     zIndex: cards.length - index,
     transition: 'transform 0.3s ease',
   });
@@ -76,7 +76,7 @@ function CardStack() {
             // Reset transform on mouse leave
             e.currentTarget.style.transform = getStyle(index, false).transform;
           }}
-          className={`absolute w-[29rem] h-[11rem] ${card.currentBgColor} ${card.currentTextColor} shadow-lg rounded-lg p-4 flex flex-col cursor-pointer`}
+          className={`absolute w-5/6 h-44 ${card.currentBgColor} ${card.currentTextColor} shadow-lg rounded-lg p-4 flex flex-col cursor-pointer`}
           style={getStyle(index, false)}
         >
           <div className="text-lg font-semibold" style={{ position: 'absolute', top: '0.2rem', left: '0.8rem' }}>{card.content}</div>

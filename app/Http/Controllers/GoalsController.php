@@ -39,6 +39,38 @@ class GoalsController extends Controller
         return Inertia::render('Goals/Create');
     }
 
+    public function addFunds(Request $request)
+{
+    $goalId = $request->input('goalId');
+    $goal = Goals::findOrFail($goalId);
+    $amount = $request->input('balance');
+
+    \DB::beginTransaction();
+    try {
+        // Update goal balance
+        $goal->balance += $amount;
+        $goal->save();
+
+        // Deduct amount from user's wallet
+        $userFinance = $goal->user->finance;
+        if ($userFinance->wallet < $amount) {
+            return response()->json(['error' => 'Insufficient wallet balance'], 422);
+        }
+        $userFinance->wallet -= $amount;
+        $userFinance->save();
+
+        \DB::commit();
+
+        return redirect()->route('dashboard');
+
+        
+    } catch (\Exception $e) {
+        \DB::rollBack();
+        return response()->json(['error' => 'Failed to add funds'], 500);
+    }
+}
+
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -46,34 +78,35 @@ class GoalsController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'money' => 'required|numeric',
-            'target_date' => 'required|date',
-            'users_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $users_image = null;
-
-        if ($request->hasFile('users_image')) {
-            $image = $request->file('users_image');
-            $filename = $image->store('images', 'public');
-
-            $users_image = $filename;
-        }
-
-        $user = auth()->user();
-        $goal = $user->goals()->create([
-            'name' => $request->input('name'),
-            'money' => $request->input('money'),
-            'target_date' => $request->input('target_date'),
-            'users_image' => $users_image,
-        ]);
-
-        return Inertia::location(route('dashboard'));
-    }
+     public function store(Request $request)
+     {
+         $request->validate([
+             'name' => 'required',
+             'target_amount' => 'required|numeric',
+             'balance' => 'numeric', // This could be optional if you always start with 0
+             'target_date' => 'required|date',
+             'users_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+         ]);
+     
+         $users_image = null;
+         if ($request->hasFile('users_image')) {
+             $image = $request->file('users_image');
+             $filename = $image->store('images', 'public');
+             $users_image = $filename;
+         }
+     
+         $user = auth()->user();
+         $goal = $user->goals()->create([
+             'name' => $request->input('name'),
+             'target_amount' => $request->input('target_amount'),
+             'balance' => $request->input('balance', 0), // Default to 0 if not provided
+             'target_date' => $request->input('target_date'),
+             'users_image' => $users_image,
+         ]);
+     
+         return redirect()->route('dashboard');
+     }
+     
     /**
      * Display the specified resource.
      *
