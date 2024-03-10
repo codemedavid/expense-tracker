@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import Sidebar from "@/Components/Sidebar";
 import PrimaryButton from "@/Components/PrimaryButton";
 import BalanceCard from "@/Components/BalanceCard";
@@ -18,11 +18,9 @@ import {
     ChevronRight,
 } from "lucide-react";
 import { Dropdown } from "flowbite-react";
-export default function Dashboard({ auth, expenses, goals, income}) {
-
-
-    console.log('income ni diri', income);
-
+export default function Dashboard({ auth, expenses, goals, finance }) {
+    console.log("kani", finance[0]);
+    const { response } = usePage();
     const [show, setShow] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const data1 = [
@@ -59,6 +57,7 @@ export default function Dashboard({ auth, expenses, goals, income}) {
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Dashboard" />
+
             <div className="flex flex-col sm:flex-row w-full gap-2 p-2">
                 <div className="sm:w-[80%] max-w-full  rounded-sm ">
                     <div className="flex flex-col sm:flex-row sm:px-10 py-7 gap-5">
@@ -80,7 +79,7 @@ export default function Dashboard({ auth, expenses, goals, income}) {
                                 Wallet
                             </p>
                             <h5 className="text-white font-bold text-2xl px-2">
-                                ₱300,000
+                                ₱{finance[0]?.wallet !== undefined ? finance[0]?.wallet : 0}
                             </h5>
                             {show && (
                                 <div className="w-20 h-12 bg-white absolute top-10 left-32">
@@ -107,7 +106,7 @@ export default function Dashboard({ auth, expenses, goals, income}) {
                                 Income
                             </p>
                             <h5 className="text-[#020826] font-bold text-2xl px-2">
-                                ₱300,000
+                                ₱{finance[0]?.totalIncome ? finance[0]?.totalIncome : 0}
                             </h5>
                         </div>
                         <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
@@ -124,8 +123,8 @@ export default function Dashboard({ auth, expenses, goals, income}) {
                             <p className="text-[#020826] px-2 text-xl mt-3 font-bold">
                                 Expenses
                             </p>
-                            <h5 className="text-[#020826] font-bold text-2xl px-2">
-                                ₱300,000
+                            <h5 className="text-[#932b2b] font-bold text-2xl px-2">
+                                ₱{finance[0]?.expense !== undefined ? finance[0]?.expense : 0 }
                             </h5>
                         </div>
                         <div className="bg-[#eaddcf] sm:w-[24%] mt-3 rounded-md p-4 hover:bg-[#ebd5bf] transition ease-in-out ">
@@ -137,7 +136,7 @@ export default function Dashboard({ auth, expenses, goals, income}) {
                             </h5>
                         </div>
                     </div>
-                    <Graphs></Graphs>
+                    <Graphs expenses={expenses} />
 
                     <div className=" bg-white sm:mx-10">
                         <div className="flex justify-between items-center pr-2">

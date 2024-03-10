@@ -11,4 +11,9 @@ class Income extends Model
     protected $fillable = ['title', 'schedule', 'income'];
 
     use HasFactory;
+
+    public function finance()
+    {
+        return $this->belongsTo(Finance::class);
+    }
 }
