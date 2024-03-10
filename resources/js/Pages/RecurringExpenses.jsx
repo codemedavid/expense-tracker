@@ -1,5 +1,3 @@
-// RecurringExpenses.jsx
-
 import React, { useState } from 'react';
 import { Reorder } from 'framer-motion';
 
@@ -21,6 +19,12 @@ function RecurringExpenses() {
       <div className="mb-4 w-full text-center p-2 bg-blue-800 text-white rounded">
         <h2 className="font-semibold text-lg">Recurring Expense</h2>
       </div>
+      {/* Buttons container */}
+      <div className="flex justify-center mb-2 mt-[-7px] space-x-4"> {/* Added space-x-4 for spacing between buttons */}
+        <button className="w-20 px-12 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 flex items-center justify-center">Save</button> {/* Adjusted width */}
+        <button className="w-20 px-12 py-2 bg-gray-500 text-white rounded shadow hover:bg-gray-600 flex items-center justify-center">Default</button> {/* Adjusted width */}
+      </div>
+      {/* Expense items */}
       <Reorder.Group axis="y" values={expenses} onReorder={setExpenses} className="w-full">
         {expenses.map((expense) => (
           <Reorder.Item key={expense.id} value={expense} className="mb-4 p-4 bg-gray-100 rounded shadow">
