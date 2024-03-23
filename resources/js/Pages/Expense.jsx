@@ -125,22 +125,6 @@ function Expense({auth}) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </AuthenticatedLayout>
 
   )
