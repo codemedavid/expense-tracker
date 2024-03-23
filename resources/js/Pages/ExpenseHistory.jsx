@@ -2,14 +2,8 @@ import React, { useState } from 'react';
 import { Download, Search } from 'lucide-react';
 import DropdownMenu from './DropdownMenu';
 
-function ExpenseHistory() {
-  const [history, setHistory] = useState([
-    { id: '1', title: "Electricity", category: 'Utilities', date: '2023-03-01', value: '$100' },
-    { id: '2', title: "Foods", category: 'Groceries', date: '2023-03-02', value: '$200' },
-    { id: '3', title: "Water Bill", category: 'Utilities', date: '2023-03-03', value: '$150' },
-    { id: '4', title: "Netflix", category: 'Entertainment', date: '2023-03-04', value: '$50' },
-    // Add more history items as needed
-  ]);
+function ExpenseHistory({expenses}) {
+  const [history, setHistory] = useState(expenses);
 
   const items = [
     { name: "Utilities" },
@@ -32,6 +26,7 @@ function ExpenseHistory() {
     setSearchQuery(e.target.value);
   };
 
+  console.log(expenses)
   const filteredHistory = history.filter((item) => {
     const searchMatch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.category.toLowerCase().includes(searchQuery.toLowerCase());
     return searchMatch;
@@ -83,13 +78,13 @@ function ExpenseHistory() {
       </div>
       <div className="flex flex-col items-center justify-top p-4 text-black bg-white rounded shadow">
         <div className="w-full">
-          {filteredHistory.map((item) => (
+          {expenses.map((item) => (
             <div key={item.id} className="mb-4 p-4 bg-gray-100 rounded shadow flex justify-between">
               <div className="flex flex-col">
               <p className="text-md font-bold text-gray-600 mb-auto">{item.title}</p>
-                <p className="text-sm text-gray-600 mb-3">Date: <span className="font-semibold">{item.date}</span></p>
+                <p className="text-sm text-gray-600 mb-3">Date: <span className="font-semibold">{item.created_at}</span></p>
                 <p className="text-sm text-gray-600 mb-auto">Category: <span className="font-semibold">{item.category}</span></p>
-                <p className="text-sm text-gray-600 mb-auto">Value: <span className="font-semibold">{item.value}</span></p>
+                <p className="text-sm text-gray-600 mb-auto">Value: <span className="font-semibold">P{item.price}</span></p>
               </div>
             </div>
           ))}
