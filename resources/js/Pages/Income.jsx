@@ -176,8 +176,8 @@ function Income({auth, income}) {
               >
                 <option value=''>Select</option>
                 <option value='Just Now'>Just Now</option>
-                <option value='Daily'>Daily</option>
-                <option value='Monthly'>Monthly</option>
+                <option value='daily'>Daily</option>
+                <option value='monthly'>Monthly</option>
               </select>
             </div>
   </div>

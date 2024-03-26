@@ -1,17 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Inertia\Inertia;
 use App\Models\RecurringBill;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
+
 class FinancialSetupController extends Controller
 {
     public function index(Request $request)
     {
-        return Inertia::render('Setup', [
-
-        ]);
+        return Inertia::render('Setup', []);
     }
 
 
@@ -48,9 +48,23 @@ class FinancialSetupController extends Controller
             ]);
         }
 
+
+        $user->income()->create([
+            'title' => 'Monthly Salary',
+            'schedule' => 'monthly',
+            'income' => $data['monthlySalary'],
+        ]);
+
+        $finance = $user->finance()->firstOrCreate();
+        $finance->totalIncome += $data['monthlySalary'];
+        $finance->wallet += $data['monthlySalary'];
+        $finance->save();
+
         $user = $request->user();
         $user->setup_complete = true;
         $user->save();
+
+
 
 
         // Redirect the user after setup completion
